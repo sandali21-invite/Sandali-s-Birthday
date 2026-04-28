@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sandali's 21st Birthday</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pacifico&family=Baloo+2:wght@400;600&family=Quicksand:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: 'Freshener', cursive, sans-serif;
+      <link href="https://fonts.cdnfonts.com/css/freshener" rel="stylesheet"
+    }
+
+    @font-face {
+      font-family: 'HeartFont';
+      src: url('https://fonts.cdnfonts.com/s/10462/TheHeartOfEverything.woff') format('woff');
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: 'Baloo 2', cursive;
+      background: linear-gradient(135deg, #ffffff, #e6f7ff);
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    /* animated sky background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(120deg, #dff6ff, #ffffff, #cceeff);
+      background-size: 200% 200%;
+      animation: skyMove 10s ease infinite;
+      z-index: -3;
+    }
+
+    @keyframes skyMove {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
+    }
+
+    /* floating balloons */
+    .balloon {
+      position: fixed;
+      bottom: -150px;
+      width: 40px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(77, 166, 255, 0.5);
+      animation: floatUp linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0)
+      }
+
+      to {
+        transform: translateY(-120vh)
+      }
+    }
+
+    /* sparkles */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    /* opening card animation */
+    #cover {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #cceeff, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10;
+      cursor: pointer;
+      animation: popIn 1s;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+
+    #cover h1 {
+      font-family: 'Pacifico';
+      color: #4da6ff;
+      font-size: 2.5em;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-family: 'Pacifico';
+      font-size: 3.5em;
+      color: #4da6ff;
+      animation: bounceText 3s infinite;
+    }
+
+    @keyframes bounceText {
+      50% {
+        transform: translateY(-15px)
+      }
+    }
+
+    .section {
+      margin: 40px auto;
+      padding: 25px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      transition: all 0.7s ease;
+    }
+
+    .section.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .section:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 25px 50px rgba(77, 166, 255, 0.35);
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .title-row img {
+      width: 28px;
+      animation: wiggle 2s infinite
+    }
+
+    @keyframes wiggle {
+
+      0%,
+      100% {
+        transform: rotate(0)
+      }
+
+      50% {
+        transform: rotate(8deg)
+      }
+    }
+
+    .event-font {
+      font-family: 'CookieMonster';
+      font-size: 1.5em
+    }
+
+    .message-font {
+      font-family: 'HeartFont';
+      font-size: 1.3em
+    }
+
+    /* countdown cartoon style */
+    .countdown {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .time-box {
+      background: linear-gradient(135deg, #4da6ff, #7fd3ff);
+      color: white;
+      padding: 15px;
+      border-radius: 25px;
+      width: 75px;
+      animation: floatBox 3s ease-in-out infinite;
+    }
+
+    @keyframes floatBox {
+      50% {
+        transform: translateY(-8px)
+      }
+    }
+
+    .time-label {
+      font-size: 0.7em
+    }
+
+    button {
+      background: linear-gradient(45deg, #4da6ff, #7fd3ff);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.15)
+    }
+
+    .map iframe {
+      width: 100%;
+      border-radius: 15px
+    }
+
+    footer {
+      margin: 30px;
+      color: #555
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="sparkles"></canvas>
+
+  <div id="cover" onclick="openCard()">
+    <h1>Tap to Open</h1>
+    <p>Your Invitation Awaits</p>
+  </div>
+
+  <div class="hero">
+    <h2>you're invited</h2>
+    <h1>Sandali’s 21st</h1>
+    <p>soft dreamy celebration</p>
+  </div>
+
+  <div class="section event-font">
+    <div class="title-row">
+      <img src="https://cdn-icons-png.flaticon.com/512/8541/8541213.png" width="40">
+      <h3>Birthday May 4th</h3>
+    </div>
+    <div class="title-row">
+      <img src="https://cdn-icons-png.flaticon.com/512/2693/2693710.png" width="40">
+      <h3>Party May 10th | At Home</h3>
+    </div>
+  </div>
+
+  <div class="section message-font">
+    <div class="title-row">
+      <img src="https://cdn-icons-png.flaticon.com/512/10184/10184921.png" width="40">
+      <h3>Message</h3>
+    </div>
+    <p>let’s create magical memories together</p>
+  </div>
+
+  <div class="section">
+    <div class="title-row">
+      <img src="https://cdn-icons-png.flaticon.com/512/5719/5719432.png" width="40">
+      <h3>Countdown</h3>
+    </div>
+    <div class="countdown">
+      <div class="time-box"><span id="days"></span>
+        <div class="time-label">Days</div>
+      </div>
+      <div class="time-box"><span id="hours"></span>
+        <div class="time-label">Hours</div>
+      </div>
+      <div class="time-box"><span id="minutes"></span>
+        <div class="time-label">Mins</div>
+      </div>
+      <div class="time-box"><span id="seconds"></span>
+        <div class="time-label">Secs</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section map">
+    <div class="title-row">
+      <img src="https://cdn-icons-png.flaticon.com/512/5586/5586812.png" width="40">
+      <h3>Location</h3>
+    </div>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d620.4418054970416!2d79.92305208616355!3d6.699785374182353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2slk!4v1777399100048!5m2!1sen!2slk"></iframe>
+  </div>
+
+  <div class="section">
+    <div class="title-row">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+      <h3>Are you coming or not?</h3>
+    </div>
+    <button onclick="window.open('https://wa.me/94703483833')">Join via WhatsApp</button>
+  </div>
+
+  <footer>see you there</footer>
+
+  <script>
+    function openCard() { document.getElementById('cover').style.display = 'none' }
+
+    /* sparkles */
+    const canvas = document.getElementById('sparkles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = innerWidth; canvas.height = innerHeight;
+    let stars = [];
+    for (let i = 0; i < 150; i++) {
+      stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 2 })
+    }
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#aee7ff';
+      stars.forEach(s => {
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fill();
+        s.y += 0.4; if (s.y > canvas.height) s.y = 0;
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    /* balloons */
+    for (let i = 0; i < 12; i++) {
+      let b = document.createElement('div');
+      b.className = 'balloon';
+      b.style.left = Math.random() * 100 + 'vw';
+      b.style.animationDuration = (5 + Math.random() * 10) + 's';
+      b.style.background = 'rgba(77,166,255,' + (0.2 + Math.random() * 0.3) + ')';
+      document.body.appendChild(b);
+    }
+
+    /* countdown */
+    const eventDate = new Date('May 10, 2026').getTime();
+    setInterval(() => {
+      let now = new Date().getTime();
+      let diff = eventDate - now;
+      document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+    }, 1000);
+
+    /* scroll reveal */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show') })
+    });
+    document.querySelectorAll('.section').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+
+</html>
