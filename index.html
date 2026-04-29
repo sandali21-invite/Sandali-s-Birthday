@@ -11,25 +11,7 @@
     rel="stylesheet">
 
   <style>
-    .butterfly-container {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: -1;
- }
-
-     /* butterfly shape */
-    .butterfly {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      background: url("https://cdn-icons-png.flaticon.com/512/616/616430.png") no-repeat center/contain;
-      opacity: 0.7;
-      animation: fly linear infinite;
- }
-
-/* movement */
+   
 @keyframes fly {
   0% {
     transform: translateY(100vh) translateX(0) scale(0.6);
@@ -284,7 +266,6 @@
 <body>
 
   <canvas id="sparkles"></canvas>
-  <div class="butterfly-container"></div>
 
   <div id="cover" onclick="openCard()">
     <h1>Tap to Open</h1>
@@ -426,18 +407,7 @@
     });
     document.querySelectorAll('.section').forEach(el => observer.observe(el));
 
-    const container = document.querySelector('.butterfly-container');
 
-    for (let i = 0; i < 15; i++) {
-     let b = document.createElement('div');
-      b.className = 'butterfly';
-
-      b.style.left = Math.random() * 100 + 'vw';
-      b.style.animationDuration = (6 + Math.random() * 8) + 's';
-      b.style.animationDelay = Math.random() * 5 + 's';
-
-    container.appendChild(b);
-  }
   </script>
 
 </body>
