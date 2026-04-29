@@ -425,16 +425,16 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show') })
     });
     document.querySelectorAll('.section').forEach(el => observer.observe(el));
-    <script>
-  const container = document.querySelector('.butterfly-container');
 
-  for (let i = 0; i < 15; i++) {
-    let b = document.createElement('div');
-    b.className = 'butterfly';
+    const container = document.querySelector('.butterfly-container');
 
-    b.style.left = Math.random() * 100 + 'vw';
-    b.style.animationDuration = (6 + Math.random() * 8) + 's';
-    b.style.animationDelay = Math.random() * 5 + 's';
+    for (let i = 0; i < 15; i++) {
+     let b = document.createElement('div');
+      b.className = 'butterfly';
+
+      b.style.left = Math.random() * 100 + 'vw';
+      b.style.animationDuration = (6 + Math.random() * 8) + 's';
+      b.style.animationDelay = Math.random() * 5 + 's';
 
     container.appendChild(b);
   }
