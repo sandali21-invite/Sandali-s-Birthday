@@ -11,46 +11,33 @@
     rel="stylesheet">
 
   <style>
-  /* all your existing CSS... */
+    .butterfly-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+ }
 
-  .map iframe {
-    width: 100%;
-    border-radius: 15px
-  }
+     /* butterfly shape */
+    .butterfly {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: url("https://cdn-icons-png.flaticon.com/512/616/616430.png") no-repeat center/contain;
+      opacity: 0.7;
+      animation: fly linear infinite;
+ }
 
-  footer {
-    margin: 30px;
-    color: #555
+/* movement */
+@keyframes fly {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0.6);
   }
-
-  /* 👇 ADD IT HERE (recommended) */
-  .video-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: -30px;
-    margin-bottom: 20px;
+  100% {
+    transform: translateY(-120vh) translateX(60px) scale(1);
   }
-
-  .video-wrapper video {
-    width: 80%;
-    max-width: 500px;
-    border-radius: 25px;
-    box-shadow: 0 20px 40px rgba(77, 166, 255, 0.25);
-    opacity: 0.9;
-    animation: floatVideo 4s ease-in-out infinite;
-  }
-    
-  .video-wrapper {
-    position: relative;
-    z-index: 2;
-  }
-
-  @keyframes floatVideo {
-    50% {
-      transform: scale(1.03) translateY(-8px);
-    }
-  }
+}
 
     @font-face {
       font-family: 'HeartFont';
@@ -297,6 +284,7 @@
 <body>
 
   <canvas id="sparkles"></canvas>
+  <div class="butterfly-container"></div>
 
   <div id="cover" onclick="openCard()">
     <h1>Tap to Open</h1>
@@ -309,12 +297,6 @@
     <p>soft dreamy celebration</p>
   </div>
 
-   <!-- dreamy video animation -->
- <div class="video-wrapper">
-   <video autoplay muted loop playsinline>
-     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-   </video>
- </div>
 
  <div class="section event-font">
   <div class="title-row">
@@ -443,6 +425,19 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show') })
     });
     document.querySelectorAll('.section').forEach(el => observer.observe(el));
+    <script>
+  const container = document.querySelector('.butterfly-container');
+
+  for (let i = 0; i < 15; i++) {
+    let b = document.createElement('div');
+    b.className = 'butterfly';
+
+    b.style.left = Math.random() * 100 + 'vw';
+    b.style.animationDuration = (6 + Math.random() * 8) + 's';
+    b.style.animationDelay = Math.random() * 5 + 's';
+
+    container.appendChild(b);
+  }
   </script>
 
 </body>
